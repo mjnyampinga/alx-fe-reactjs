@@ -28,11 +28,10 @@ function App() {
       </main>
 
       {/* === Task 3: use props === */}
-      <UserProfile
-        name="Alice"
-        age={25}
-        bio="Loves hiking and photography"
-      />
+      
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
+
+    
 
       {/* --- Your existing Vite demo UI --- */}
       <div>
