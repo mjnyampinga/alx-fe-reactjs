@@ -1,12 +1,16 @@
+// src/App.jsx
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
-import Header from './components/Header';
-import MainContent from './components/MainContent';
-import Footer from './components/Footer';
-import WelcomeMessage from './components/WelcomeMessage';
+// ✅ point to the components folder (with .jsx extension)
+import Header from './components/Header.jsx';
+import MainContent from './components/MainContent.jsx';
+import Footer from './components/Footer.jsx';
+
+// Optional extra component you made earlier
+import WelcomeMessage from './components/WelcomeMessage.jsx';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,7 +22,7 @@ function App() {
       <MainContent />
       <Footer />
 
-      {/* === Your existing Vite demo UI (optional) === */}
+      {/* === Your existing Vite demo UI (kept intact) === */}
       <div>
         <a href="https://vite.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -30,7 +34,7 @@ function App() {
 
       <h1>Vite + React</h1>
 
-      {/* Your custom component from Task 1 */}
+      {/* Optional task-1 component */}
       <main style={{ marginTop: '1rem' }}>
         <WelcomeMessage />
       </main>
