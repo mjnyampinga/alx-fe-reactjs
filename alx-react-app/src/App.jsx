@@ -4,25 +4,37 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
-// ✅ point to the components folder (with .jsx extension)
-import Header from './components/Header.jsx';
-import MainContent from './components/MainContent.jsx';
-import Footer from './components/Footer.jsx';
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
+import WelcomeMessage from './components/WelcomeMessage';
 
-// Optional extra component you made earlier
-import WelcomeMessage from './components/WelcomeMessage.jsx';
+// NEW
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      {/* === ALX required components (order matters) === */}
+      {/* === ALX required components === */}
       <Header />
       <MainContent />
       <Footer />
 
-      {/* === Your existing Vite demo UI (kept intact) === */}
+      {/* Task 1 component (still fine to keep) */}
+      <main style={{ marginTop: '1rem' }}>
+        <WelcomeMessage />
+      </main>
+
+      {/* === Task 3: use props === */}
+      <UserProfile
+        name="Alice"
+        age={25}
+        bio="Loves hiking and photography"
+      />
+
+      {/* --- Your existing Vite demo UI --- */}
       <div>
         <a href="https://vite.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -33,11 +45,6 @@ function App() {
       </div>
 
       <h1>Vite + React</h1>
-
-      {/* Optional task-1 component */}
-      <main style={{ marginTop: '1rem' }}>
-        <WelcomeMessage />
-      </main>
 
       <div className="card">
         <button onClick={() => setCount((c) => c + 1)}>
