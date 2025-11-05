@@ -6,20 +6,20 @@ import './App.css';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
-import UserProfile from './components/UserProfile';   // <- ensure this import exists
+import UserProfile from './components/UserProfile'; // make sure file is: src/components/UserProfile.jsx
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      {/* Assignment components */}
+      {/* === Assignment components (order matters) === */}
       <Header />
       <MainContent />
       <UserProfile name="Alice" age={25} bio="Loves hiking and photography" />
       <Footer />
 
-      {/* Your existing Vite demo UI (optional) */}
+      {/* === Existing Vite demo UI (optional) === */}
       <div>
         <a href="https://vite.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
