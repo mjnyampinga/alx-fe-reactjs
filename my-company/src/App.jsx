@@ -1,3 +1,4 @@
+// src/App.jsx
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./Home";
@@ -5,9 +6,8 @@ import About from "./About";
 import Services from "./Services";
 import Contact from "./components/Contact";
 
-
 function App() {
-  // inline page wrapper style (kept simple to satisfy the “inline CSS” requirement)
+  // simple inline style to satisfy the inline-CSS requirement
   const pageStyle = { padding: "20px" };
 
   return (
