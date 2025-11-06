@@ -1,6 +1,10 @@
 // src/UserContext.js
 import React from "react";
 
-const UserContext = React.createContext();
+// create the context with a default shape
+const UserContext = React.createContext({
+  name: "",
+  email: "",
+});
 
 export default UserContext;
