@@ -1,8 +1,7 @@
-// src/UserInfo.jsx
 import UserDetails from "./UserDetails";
 
 function UserInfo() {
-  // no props; just compose
+  // no props here either
   return <UserDetails />;
 }
 

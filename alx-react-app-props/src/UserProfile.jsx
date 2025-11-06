@@ -1,4 +1,3 @@
-// src/components/UserProfile.jsx
 import { useContext } from "react";
 import UserContext from "../UserContext";
 
