@@ -1,14 +1,14 @@
-// App.jsx
-import ProfilePage from "./ProfilePage";
+// src/App.jsx
+import "./App.css";
+import UserProfile from "./UserProfile";
 import UserContext from "./UserContext";
 
 function App() {
-  // single source of truth for user data
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
   return (
     <UserContext.Provider value={userData}>
-      <ProfilePage />
+      <UserProfile />
     </UserContext.Provider>
   );
 }
