@@ -6,9 +6,9 @@ import AddRecipeForm from './components/AddRecipeForm';
 import RecipeDetails from './components/RecipeDetails';
 import SearchBar from './components/SearchBar';
 
-// NEW: favourites & recommendations
-import FavouritesList from './components/FavouritesList';
-import RecommendationList from './components/RecommendationList';
+// Use EXACT expected names/paths
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 function App() {
   return (
@@ -27,8 +27,8 @@ function App() {
                 <AddRecipeForm />
                 <RecipeList />
                 {/* NEW sections */}
-                <FavouritesList />
-                <RecommendationList />
+                <FavoritesList />
+                <RecommendationsList />
               </>
             }
           />
