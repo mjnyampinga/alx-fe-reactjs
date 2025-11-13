@@ -1,18 +1,27 @@
+// src/components/AddRecipeForm.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useRecipeStore from './recipeStore';
 
 const AddRecipeForm = () => {
   const addRecipe = useRecipeStore((state) => state.addRecipe);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) return;
 
-    addRecipe({ id: Date.now(), title: title.trim(), description: description.trim() });
+    const id = Date.now();
+    addRecipe({ id, title: title.trim(), description: description.trim() });
+
+    // reset form (same as before)
     setTitle('');
     setDescription('');
+
+    // NEW: go to the details page for the created recipe
+    navigate(`/recipes/${id}`);
   };
 
   return (
