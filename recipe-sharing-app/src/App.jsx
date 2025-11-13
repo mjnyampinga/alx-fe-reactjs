@@ -6,6 +6,10 @@ import AddRecipeForm from './components/AddRecipeForm';
 import RecipeDetails from './components/RecipeDetails';
 import SearchBar from './components/SearchBar';
 
+// NEW: favourites & recommendations
+import FavouritesList from './components/FavouritesList';
+import RecommendationList from './components/RecommendationList';
+
 function App() {
   return (
     <Router>
@@ -22,6 +26,9 @@ function App() {
                 <SearchBar />
                 <AddRecipeForm />
                 <RecipeList />
+                {/* NEW sections */}
+                <FavouritesList />
+                <RecommendationList />
               </>
             }
           />
