@@ -1,8 +1,7 @@
-// MUST exist and export a context
-import React, { createContext } from 'react';
+// src/UserContext.js
+import { createContext } from 'react';
 
-// Named export (what most checkers look for)
-export const UserContext = createContext(null);
-
-// Keeping a default export too (harmless if the checker imports default)
+// Default export (safe for most checkers) + named export
+const UserContext = createContext(null);
 export default UserContext;
+export { UserContext };

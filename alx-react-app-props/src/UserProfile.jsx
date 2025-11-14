@@ -1,8 +1,8 @@
+// src/UserProfile.jsx
 import React, { useContext } from 'react';
-import { UserContext } from './UserContext';
+import UserContext from './UserContext';
 
 function UserProfile() {
-  // The checker wants useContext here
   const userData = useContext(UserContext);
 
   return (
