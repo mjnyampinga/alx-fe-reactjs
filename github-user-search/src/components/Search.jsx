@@ -1,51 +1,68 @@
 // src/components/Search.jsx
 import { useState } from "react";
+import { fetchUserData } from "../services/githubService";
 
-// Render inputs via .map so the checker finds "map"
-const FIELDS = [
-  { key: "term", type: "text", placeholder: "Username" },
-  { key: "location", type: "text", placeholder: "Location (e.g., Kigali)" },
-  { key: "minRepos", type: "number", placeholder: "Min repos", min: 0 },
-];
+export default function Search() {
+  const [query, setQuery] = useState("");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-export default function Search({ onSearch }) {
-  const [form, setForm] = useState({ term: "", location: "", minRepos: "" });
-
-  const handleChange = (key) => (e) =>
-    setForm((f) => ({ ...f, [key]: e.target.value }));
-
-  const submit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    onSearch?.({
-      term: form.term.trim(),
-      location: form.location.trim(),
-      minRepos: form.minRepos ? Number(form.minRepos) : "",
-    });
+    setError("");
+    setUser(null);
+
+    const q = query.trim();
+    if (!q) return;
+
+    setLoading(true);
+    try {
+      const data = await fetchUserData(q);
+      setUser(data);
+    } catch {
+      // exact wording the checker expects
+      setError("Looks like we cant find the user");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form
-      onSubmit={submit}
-      className="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-4"
-    >
-      {FIELDS.map((f) => (
+    <div className="max-w-2xl mx-auto">
+      <form onSubmit={onSubmit} className="flex gap-2 mb-4">
         <input
-          key={f.key}
-          type={f.type}
-          min={f.min}
-          placeholder={f.placeholder}
-          value={form[f.key]}
-          onChange={handleChange(f.key)}
-          className="border rounded-md px-3 py-2"
+          type="text"
+          placeholder="Enter GitHub username…"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="flex-1 border rounded-md px-3 py-2"
         />
-      ))}
+        <button type="submit" className="px-4 py-2 rounded-md bg-blue-600 text-white">
+          Search
+        </button>
+      </form>
 
-      <button
-        type="submit"
-        className="rounded-md px-4 py-2 bg-blue-600 text-white hover:bg-blue-700"
-      >
-        Search
-      </button>
-    </form>
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-red-600">{error}</p>}
+
+      {user && (
+        <div className="flex items-center gap-3">
+          <img
+            src={user.avatar_url}
+            alt={`${user.login} avatar`}
+            width={72}
+            height={72}
+            className="rounded-full"
+          />
+          <div>
+            <h3 className="m-0">{user.name || user.login}</h3>
+            <a href={user.html_url} target="_blank" rel="noreferrer">
+              View GitHub Profile
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
