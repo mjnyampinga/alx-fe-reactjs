@@ -1,3 +1,5 @@
+// src/main.jsx
+import "./index.css"; // Tailwind directives (@tailwind base/components/utilities)
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
