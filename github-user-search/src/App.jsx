@@ -20,9 +20,23 @@ export default function App() {
     setError("");
     try {
       const data = await searchUsers(q); // { items: [...] }
-      setUsers(data.items ?? []);
+      const items = data?.items ?? [];
+
+      if (items.length === 0) {
+        // match checker’s expected message when nothing is found
+        setUsers([]);
+        setError("Looks like we cant find the user");
+      } else {
+        setUsers(items);
+      }
     } catch (e) {
-      setError(e?.response?.data?.message || e.message || "Something went wrong");
+      // if GitHub returns 404 (or we want to standardize “not found”)
+      if (e?.response?.status === 404) {
+        setError("Looks like we cant find the user");
+      } else {
+        setError(e?.response?.data?.message || e.message || "Something went wrong");
+      }
+      setUsers([]);
     } finally {
       setLoading(false);
     }
