@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SearchBar from "./components/SearchBar";
+import Search from "./components/Search";
 import UserGrid from "./components/UserGrid";
 import { searchUsers } from "./services/github";
 
