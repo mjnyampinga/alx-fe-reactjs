@@ -1,24 +1,16 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 
-// === Existing Components ===
-import Header from "./components/Header";
-import MainContent from "./components/MainContent";
-import Footer from "./components/Footer";
-import UserProfile from "./components/UserProfile";
-import Counter from "./components/Counter";
-
-// === New Context Task Imports ===
-import ProfilePage from "./ProfilePage";
-import UserContext from "./UserContext";
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
+import UserProfile from './components/UserProfile';
+import Counter from './components/Counter'; // ✅ NEW: Import Counter.jsx
 
 function App() {
   const [count, setCount] = useState(0);
-
-  // Single source of truth for user data (Context API task)
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
   return (
     <>
@@ -27,17 +19,12 @@ function App() {
       <MainContent />
       <UserProfile name="Alice" age={25} bio="Loves hiking and photography" />
 
-      {/* ✅ Counter Component */}
+      {/* ✅ Add Counter component below UserProfile */}
       <Counter />
-
-      {/* ✅ Wrap the ProfilePage inside the UserContext Provider */}
-      <UserContext.Provider value={userData}>
-        <ProfilePage />
-      </UserContext.Provider>
 
       <Footer />
 
-      {/* === Vite Default Demo UI (optional) === */}
+      {/* === Vite Default Demo (you can leave this as-is) === */}
       <div>
         <a href="https://vite.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -50,9 +37,7 @@ function App() {
       <h1>Vite + React</h1>
 
       <div className="card">
-        <button onClick={() => setCount((c) => c + 1)}>
-          count is {count}
-        </button>
+        <button onClick={() => setCount((c) => c + 1)}>count is {count}</button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
