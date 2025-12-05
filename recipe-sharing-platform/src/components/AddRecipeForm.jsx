@@ -4,15 +4,12 @@ const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     const validationErrors = {};
 
-    if (!title.trim()) {
-      validationErrors.title = "Title is required.";
-    }
+    if (!title.trim()) validationErrors.title = "Title is required.";
 
     if (!ingredients.trim()) {
       validationErrors.ingredients = "Ingredients are required.";
@@ -24,9 +21,7 @@ const AddRecipeForm = () => {
       }
     }
 
-    if (!steps.trim()) {
-      validationErrors.steps = "Steps are required.";
-    }
+    if (!steps.trim()) validationErrors.steps = "Steps are required.";
 
     setErrors(validationErrors);
     return Object.keys(validationErrors).length === 0;
@@ -34,7 +29,6 @@ const AddRecipeForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!validate()) return;
 
     const newRecipe = {
@@ -45,7 +39,6 @@ const AddRecipeForm = () => {
 
     console.log("Submitted recipe:", newRecipe);
 
-    // Clear form fields
     setTitle("");
     setIngredients("");
     setSteps("");
@@ -54,15 +47,16 @@ const AddRecipeForm = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 py-10 px-4">
-      <div className="max-w-xl mx-auto bg-white shadow-lg rounded-xl p-8">
-        <h2 className="text-2xl font-bold mb-6 text-slate-800 text-center">
+      <div className="max-w-xl mx-auto bg-white shadow-lg rounded-xl p-8 md:p-10">
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-slate-800 text-center">
           Add New Recipe
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+
           {/* Title */}
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+          <div className="md:flex md:flex-col">
+            <label className="block text-sm font-medium text-slate-700 mb-1 md:text-base">
               Recipe Title
             </label>
             <input
@@ -77,8 +71,8 @@ const AddRecipeForm = () => {
           </div>
 
           {/* Ingredients */}
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+          <div className="md:flex md:flex-col">
+            <label className="block text-sm font-medium text-slate-700 mb-1 md:text-base">
               Ingredients (comma-separated)
             </label>
             <textarea
@@ -92,8 +86,8 @@ const AddRecipeForm = () => {
           </div>
 
           {/* Steps */}
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+          <div className="md:flex md:flex-col">
+            <label className="block text-sm font-medium text-slate-700 mb-1 md:text-base">
               Preparation Steps
             </label>
             <textarea
@@ -106,10 +100,9 @@ const AddRecipeForm = () => {
             )}
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-3 rounded-lg font-medium hover:bg-emerald-600 transition"
+            className="w-full bg-emerald-500 text-white py-3 rounded-lg font-medium hover:bg-emerald-600 transition md:text-lg md:py-4"
           >
             Submit Recipe
           </button>
