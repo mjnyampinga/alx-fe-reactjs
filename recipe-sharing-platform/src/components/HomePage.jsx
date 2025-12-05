@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import recipesData from "../data.json";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
 
-  // Load data from data.json when component mounts
+  // Load data when component mounts
   useEffect(() => {
     setRecipes(recipesData);
   }, []);
@@ -12,6 +13,8 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-slate-100 py-10">
       <div className="max-w-6xl mx-auto px-4">
+        
+        {/* Header */}
         <header className="mb-10 text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
             Recipe Sharing Platform
@@ -21,9 +24,8 @@ const HomePage = () => {
           </p>
         </header>
 
-        {/* Responsive grid of recipe cards */}
+        {/* Responsive Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
           {recipes.map((recipe) => (
             <article
               key={recipe.id}
@@ -39,13 +41,18 @@ const HomePage = () => {
                 <h2 className="text-xl font-semibold text-slate-800 mb-2">
                   {recipe.title}
                 </h2>
+
                 <p className="text-sm text-slate-600 flex-1">
                   {recipe.summary}
                 </p>
 
-                <button className="mt-4 inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2">
+                {/* 🔗 Link to Recipe Detail */}
+                <Link
+                  to={`/recipe/${recipe.id}`}
+                  className="mt-4 inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
+                >
                   View Recipe
-                </button>
+                </Link>
               </div>
             </article>
           ))}
