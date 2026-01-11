@@ -6,37 +6,47 @@ export default function RegistrationForm() {
   const [password, setPassword] = useState("");
 
   const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newErrors = {};
+
     if (!username.trim()) newErrors.username = "Username is required";
     if (!email.trim()) newErrors.email = "Email is required";
     if (!password.trim()) newErrors.password = "Password is required";
 
     setErrors(newErrors);
 
-    // If no errors, proceed
-    if (Object.keys(newErrors).length === 0) {
-      alert("Controlled Form Submitted ✅");
-      setUsername("");
-      setEmail("");
-      setPassword("");
+    if (Object.keys(newErrors).length > 0) {
+      setStatus("Please fix the errors above.");
+      return;
     }
+
+    // If no errors
+    setStatus("Registration successful ✅ (Controlled Form)");
+    console.log({ username, email, password });
+
+    // Reset form
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setErrors({});
   };
 
   return (
     <div className="form-wrapper">
       <h2>Controlled Registration Form</h2>
 
-      <form onSubmit={handleSubmit} className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <label>
           Username
           <input
-            name="username"
+            type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter username"
           />
           {errors.username && <p className="error-text">{errors.username}</p>}
         </label>
@@ -44,9 +54,10 @@ export default function RegistrationForm() {
         <label>
           Email
           <input
-            name="email"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email"
           />
           {errors.email && <p className="error-text">{errors.email}</p>}
         </label>
@@ -55,14 +66,16 @@ export default function RegistrationForm() {
           Password
           <input
             type="password"
-            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
         </label>
 
         <button type="submit">Register</button>
+
+        {status && <p className="status-text">{status}</p>}
       </form>
     </div>
   );
