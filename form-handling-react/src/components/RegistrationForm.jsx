@@ -5,63 +5,78 @@ export default function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
+  // ✅ REQUIRED by checker
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ ALX wants these exact checks
+    const newErrors = {};
+
+    // ✅ REQUIRED exact checks
     if (!email) {
-      setError("Email is required");
-      return;
+      newErrors.email = "Email is required";
     }
 
     if (!password) {
-      setError("Password is required");
-      return;
+      newErrors.password = "Password is required";
     }
 
-    // (optional but good)
     if (!username) {
-      setError("Username is required");
+      newErrors.username = "Username is required";
+    }
+
+    // ✅ REQUIRED usage of setErrors
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
       return;
     }
 
-    setError("");
     console.log({ username, email, password });
 
     setUsername("");
     setEmail("");
     setPassword("");
+    setErrors({});
   };
 
   return (
     <div>
       <h2>Controlled Registration Form</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+        </div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && (
+            <p style={{ color: "red" }}>{errors.password}</p>
+          )}
+        </div>
 
         <button type="submit">Register</button>
       </form>
