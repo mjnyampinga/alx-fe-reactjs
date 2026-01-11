@@ -1,0 +1,43 @@
+.page {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-wrapper {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error-text {
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+.status-text {
+  margin-top: 10px;
+  text-align: center;
+}
