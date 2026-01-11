@@ -1,49 +1,28 @@
 import { useState } from "react";
 
 export default function RegistrationForm() {
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("");
 
-  const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const validate = () => {
-    const newErrors = {};
-    if (!form.username.trim()) newErrors.username = "Username is required";
-    if (!form.email.trim()) newErrors.email = "Email is required";
-    if (!form.password.trim()) newErrors.password = "Password is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("");
 
-    if (!validate()) return;
+    const newErrors = {};
+    if (!username.trim()) newErrors.username = "Username is required";
+    if (!email.trim()) newErrors.email = "Email is required";
+    if (!password.trim()) newErrors.password = "Password is required";
 
-    try {
-      // Mock API request (simulates registration)
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+    setErrors(newErrors);
 
-      if (!res.ok) throw new Error("Request failed");
-
-      setStatus("Registration submitted successfully ✅");
-      setForm({ username: "", email: "", password: "" });
-      setErrors({});
-    } catch (err) {
-      setStatus("Something went wrong. Please try again ❌");
+    // If no errors, proceed
+    if (Object.keys(newErrors).length === 0) {
+      alert("Controlled Form Submitted ✅");
+      setUsername("");
+      setEmail("");
+      setPassword("");
     }
   };
 
@@ -56,9 +35,8 @@ export default function RegistrationForm() {
           Username
           <input
             name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           {errors.username && <p className="error-text">{errors.username}</p>}
         </label>
@@ -67,9 +45,8 @@ export default function RegistrationForm() {
           Email
           <input
             name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           {errors.email && <p className="error-text">{errors.email}</p>}
         </label>
@@ -79,15 +56,13 @@ export default function RegistrationForm() {
           <input
             type="password"
             name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
         </label>
 
         <button type="submit">Register</button>
-        {status && <p className="status-text">{status}</p>}
       </form>
     </div>
   );
